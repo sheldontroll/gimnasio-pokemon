@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using gimnasio_pokemon.Data;
 using gimnasio_pokemon.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +8,11 @@ namespace gimnasio_pokemon.Controllers
 {
     public class CentroPController : Controller
     {
+        private CentrosContext _context;
+        public CentroPController(CentrosContext context)
+        {
+            _context = context ;
+        }
         public IActionResult Nuevo() {
             
             return View();
@@ -18,6 +25,9 @@ namespace gimnasio_pokemon.Controllers
         public IActionResult Nuevo(Centro c ) {
             
             if(ModelState.IsValid){
+                _context.Add(c);
+                _context.SaveChanges();
+
                 return RedirectToAction("Lista");
 
             }
@@ -25,8 +35,8 @@ namespace gimnasio_pokemon.Controllers
         }
 
         public IActionResult Lista(){
-            var centros = new List<Centro>();
-            return View(centros);
+            var centro = _context.Centros.OrderBy(p => p.nombreCiudad).ToList();
+            return View(centro);
         }
 
     }

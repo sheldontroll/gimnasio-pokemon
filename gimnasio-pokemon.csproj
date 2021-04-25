@@ -5,4 +5,9 @@
     <RootNamespace>gimnasio_pokemon</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="microsoft.entityframeworkcore" Version="5.0.5" />
+    <PackageReference Include="microsoft.entityframeworkcore.inmemory" Version="5.0.5" />
+  </ItemGroup>
+
 </Project>
